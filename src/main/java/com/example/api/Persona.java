@@ -11,8 +11,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -23,12 +21,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Entity
 @Table(name = "Persona")
 @EntityListeners(AuditingEntityListener.class)
-
 public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long idPersona;
 
     @Column(name = "Nombres", nullable = false)
     private String Nombres;
@@ -41,17 +38,20 @@ public class Persona {
 
     @Column(name = "Direccion", nullable = false)
     private String Direccion;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_archivo")
-    private Archivo archivo;
 
+    public Persona( String Nombres, String ApellidoPaterno, String ApellidoMaterno, String Direccion) {
+        this.Nombres = Nombres;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.Direccion = Direccion;
+    }
+    
     public long getId() {
-        return id;
+        return idPersona;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.idPersona = id;
     }
 
     public String getNombres() {
@@ -84,14 +84,6 @@ public class Persona {
 
     public void setDireccion(String Direccion) {
         this.Direccion = Direccion;
-    }
-
-    public Archivo getArchivo() {
-        return archivo;
-    }
-
-    public void setArchivo(Archivo archivo) {
-        this.archivo = archivo;
     }
     
 }

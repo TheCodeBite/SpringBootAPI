@@ -5,11 +5,14 @@
  */
 package com.example.api;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -34,6 +37,19 @@ public class Archivo {
     
     @Column(name = "FechaFin", nullable = false)
     private String FechaFin;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idPersona")
+    private Persona persona;
+
+    public Archivo(long id_archivo, String Nombre, String FechaCarga, String FechaInicio, String FechaFin, Persona persona) {
+        this.id_archivo = id_archivo;
+        this.Nombre = Nombre;
+        this.FechaCarga = FechaCarga;
+        this.FechaInicio = FechaInicio;
+        this.FechaFin = FechaFin;
+        this.persona = persona;
+    }
 
     public long getId_archivo() {
         return id_archivo;
