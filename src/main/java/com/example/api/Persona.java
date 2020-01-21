@@ -11,6 +11,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -38,6 +40,10 @@ public class Persona {
 
     @Column(name = "Direccion", nullable = false)
     private String Direccion;
+    
+    @ManyToOne
+    @JoinColumn(name = "archivo_id")
+    private Archivo archivo;
 
     public Persona( String Nombres, String ApellidoPaterno, String ApellidoMaterno, String Direccion) {
         this.Nombres = Nombres;

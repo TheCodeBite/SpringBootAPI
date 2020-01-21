@@ -5,14 +5,14 @@
  */
 package com.example.api;
 
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -38,17 +38,15 @@ public class Archivo {
     @Column(name = "FechaFin", nullable = false)
     private String FechaFin;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idPersona")
-    private Persona persona;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "archivo")
+    private Set<Persona> personas;
 
-    public Archivo(long id_archivo, String Nombre, String FechaCarga, String FechaInicio, String FechaFin, Persona persona) {
+    public Archivo(String Nombre, String FechaCarga, String FechaInicio, String FechaFin) {
         this.id_archivo = id_archivo;
         this.Nombre = Nombre;
         this.FechaCarga = FechaCarga;
         this.FechaInicio = FechaInicio;
         this.FechaFin = FechaFin;
-        this.persona = persona;
     }
 
     public long getId_archivo() {
@@ -89,6 +87,14 @@ public class Archivo {
 
     public void setFechaFin(String FechaFin) {
         this.FechaFin = FechaFin;
+    }
+
+    public Set<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(Set<Persona> personas) {
+        this.personas = personas;
     }
     
 }
