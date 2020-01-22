@@ -5,16 +5,22 @@
  */
 package com.example.api;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
  *
@@ -31,6 +37,37 @@ public class PersonaController {
      *
      * @return the list
      */
+    private static String fileBasePath = System.getProperty("user.dir")+"/src/main/resources/xmlDocumentos/";
+    
+    @PostMapping("/UploadFile")
+    public @ResponseBody String uploadToLocalFileSystem(@RequestParam("file") MultipartFile file){
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        Path path = Paths.get(fileBasePath + fileName);
+        System.out.println("Estamos dentro de esta cosa");
+        try{
+            Files.copy(file.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/files/downloads/")
+                .path(fileName)
+                .toUriString();
+        
+        xmlLoader xml = new xmlLoader(fileBasePath + fileName);
+        
+        if(!xml.Validador()){
+            System.out.println("SE BORRO EL FICHERO PORQUE NO CUMPLE LOS REQUERIMIENTOS NECESARIOS");
+            File borraFichero = new File(fileBasePath + fileName);
+            borraFichero.delete();
+            
+            return "No se encontraron todos los campos requeridos verifique su archivo e intentelo de nuevo!! >.<";
+            
+        }else{
+            return "Exito!!!";
+        }
+    }
     
     @PostMapping("/personas")
     public @ResponseBody String createPersona(@RequestParam String Nombres, @RequestParam String ApellidoPaterno, @RequestParam String ApellidoMaterno, @RequestParam String Direccion, @RequestParam Archivo archivo ) {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Ejercicio FechaInicio="05-01-2019" FechaFinal="25-01-2019">
+	<Personas>
+	    <Persona>
+		<Nombres>John</Nombres>
+		<ApellidoPaterno>Learner</ApellidoPaterno>
+		<FechaNacimiento>19570122</FechaNacimiento>
+		<Genero>M</Genero>
+		<Direccion>Conocido</Direccion>
+	    </Persona>
+	    <Persona>
+		<Nombres>Matilde</Nombres>
+		<ApellidoPaterno>Vignon</ApellidoPaterno>
+		<ApellidoMaterno>COYO</ApellidoMaterno>
+		<FechaNacimiento>19640719</FechaNacimiento>
+		<Genero>F</Genero>
+		<Direccion>Conocido</Direccion>
+	    </Persona>
+	</Personas>
+</Ejercicio>

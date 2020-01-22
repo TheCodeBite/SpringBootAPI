@@ -23,9 +23,13 @@ public class xmlLoader {
 
     public xmlLoader(String ruta) {
         this.ruta = ruta;
+    }
 
+    public Boolean Validador() {
+        boolean validador = false;
+        
         try {
-            File fxmlFile = new File("C:\\Personas.xml");
+            File fxmlFile = new File(ruta);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newDefaultInstance();
             DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
             Document doc = dbBuilder.parse(fxmlFile);
@@ -47,9 +51,12 @@ public class xmlLoader {
 
                         System.out.println(eElement.getElementsByTagName("Nombres").item(0).getTextContent());
                         System.out.println(eElement.getElementsByTagName("ApellidoPaterno").item(0).getTextContent());
+                        System.out.println(eElement.getElementsByTagName("ApellidoMaterno").item(0).getTextContent());
                     }
                     System.out.println("----------------------------");
                 }
+                
+                validador = true;
             } catch (Exception e) {
                 System.out.println("Verifique que todos los campos requeridos se encuentren");
             }
@@ -57,6 +64,7 @@ public class xmlLoader {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return validador;
     }
 
 }
