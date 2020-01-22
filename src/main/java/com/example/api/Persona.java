@@ -45,11 +45,14 @@ public class Persona {
     @JoinColumn(name = "archivo_id")
     private Archivo archivo;
 
-    public Persona( String Nombres, String ApellidoPaterno, String ApellidoMaterno, String Direccion) {
+    public Persona() { }
+
+    public Persona( String Nombres, String ApellidoPaterno, String ApellidoMaterno, String Direccion, Archivo archivo) {
         this.Nombres = Nombres;
         this.ApellidoPaterno = ApellidoPaterno;
         this.ApellidoMaterno = ApellidoMaterno;
         this.Direccion = Direccion;
+        this.archivo = archivo;
     }
     
     public long getId() {

@@ -42,11 +42,15 @@ public class Archivo {
     private Set<Persona> personas;
 
     public Archivo(String Nombre, String FechaCarga, String FechaInicio, String FechaFin) {
-        this.id_archivo = id_archivo;
         this.Nombre = Nombre;
         this.FechaCarga = FechaCarga;
         this.FechaInicio = FechaInicio;
         this.FechaFin = FechaFin;
+        
+        if(personas.isEmpty()){
+            Persona p = new Persona();
+            personas.add(p);
+        }
     }
 
     public long getId_archivo() {

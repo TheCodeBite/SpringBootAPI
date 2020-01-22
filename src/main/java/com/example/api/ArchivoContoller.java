@@ -24,20 +24,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ArchivoContoller {
     private ArchivoRepository archivoRepository;
     
-    @GetMapping(path = "/Archivos")
+    @GetMapping(path = "/archivos")
     public @ResponseBody Iterable<Archivo> getAllFiles() {
         return archivoRepository.findAll();
     }
-    @PostMapping(path = "/Archivos")
-    public @ResponseBody String crearAcrhivo(@RequestParam String Nombre, @RequestParam String FechaCarga, @RequestParam String FechaInicio, @RequestParam String FechaFin){
+    
+    @PostMapping(path = "/archivos")
+    public @ResponseBody String crearAcrhivo(@RequestParam String Nombre, @RequestParam String FechaInicio, @RequestParam String FechaFin){
         Date date = new Date();
         String formatDate = "hh:mm:ss: a";
         DateFormat dateFormat = new SimpleDateFormat(formatDate);
-        String today = dateFormat.format(date);
+        String today = dateFormat.format(date) + "";
         
-        Archivo file = new Archivo(Nombre, FechaCarga, FechaInicio, FechaFin);
+        Archivo file = new Archivo(Nombre, today, FechaInicio, FechaFin);
         
+        System.out.println(Nombre + " " + today);
+        
+        archivoRepository.save(file);
         
         return "Archivo agregado!";
     }
+    
+    
 }

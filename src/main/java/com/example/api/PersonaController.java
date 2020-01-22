@@ -33,9 +33,11 @@ public class PersonaController {
      */
     
     @PostMapping("/personas")
-    public @ResponseBody String createPersona(@RequestParam String Nombres, @RequestParam String ApellidoPaterno, @RequestParam String ApellidoMaterno, @RequestParam String Direccion) {
-        Persona persona = new Persona(Nombres, ApellidoPaterno, ApellidoMaterno, Direccion);
+    public @ResponseBody String createPersona(@RequestParam String Nombres, @RequestParam String ApellidoPaterno, @RequestParam String ApellidoMaterno, @RequestParam String Direccion, @RequestParam Archivo archivo ) {
+        Persona persona = new Persona(Nombres, ApellidoPaterno, ApellidoMaterno, Direccion, archivo);
         System.out.println("la informacion es " + Nombres +  " " + ApellidoPaterno + " " + ApellidoMaterno + " " + Direccion);
+        xmlLoader xml = new xmlLoader("hola");
+        
         personaRepository.save(persona);
         return "Usuario guardado ";
     }
