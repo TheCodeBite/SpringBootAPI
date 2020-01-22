@@ -51,7 +51,6 @@ public class xmlLoader {
 
                         System.out.println(eElement.getElementsByTagName("Nombres").item(0).getTextContent());
                         System.out.println(eElement.getElementsByTagName("ApellidoPaterno").item(0).getTextContent());
-                        System.out.println(eElement.getElementsByTagName("ApellidoMaterno").item(0).getTextContent());
                     }
                     System.out.println("----------------------------");
                 }

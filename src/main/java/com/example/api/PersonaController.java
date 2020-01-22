@@ -61,10 +61,12 @@ public class PersonaController {
             System.out.println("SE BORRO EL FICHERO PORQUE NO CUMPLE LOS REQUERIMIENTOS NECESARIOS");
             File borraFichero = new File(fileBasePath + fileName);
             borraFichero.delete();
+            // fileBasePath + fileName (CON ESTAS DOS VARIABLES ENCONTRARAS LA UBICACION DEL ARCHIVO ALOJADO EN LA COMPUTADORA
             
             return "No se encontraron todos los campos requeridos verifique su archivo e intentelo de nuevo!! >.<";
             
         }else{
+            
             return "Exito!!!";
         }
     }
